@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TorneioTabajara.Models.Partida>
+
+@{
+    ViewBag.Title = "Partidas";
+}
+
+<h2>Lista de Partidas</h2>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Rodada</th>
+            <th>Data</th>
+            <th>Time Casa</th>
+            <th>Time Fora</th>
+            <th>Placar</th>
+            <th>Gols</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var partida in Model)
+        {
+            var estat = partida.EstatisticaJogo;
+            var gols = estat?.Gols.OrderBy(g => g.Minuto).ToList();
+
+            <tr>
+                <td>@partida.Rodada</td>
+                <td>@partida.DataHora.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@partida.Time1.Nome</td>
+                <td>@partida.Time2.Nome</td>
+                <td>
+                    @if (estat != null)
+                    {
+                        @($"{estat.PlacarTime1} x {estat.PlacarTime2}")
+                    }
+                    else
+                    {
+                        <text>Aguardando</text>
+                    }
+                </td>
+                <td>
+                    @if (gols != null && gols.Any())
+                    {
+                        <ul>
+                            @foreach (var gol in gols)
+                            {
+                                <li>@gol.Minuto' - @gol.Jogador.Nome (@gol.Jogador.Time.Nome)</li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <text>—</text>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

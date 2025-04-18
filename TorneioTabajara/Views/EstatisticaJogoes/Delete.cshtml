@@ -1,0 +1,48 @@
+﻿@model TorneioTabajara.Models.EstatisticaJogo
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>EstatisticaJogo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Partida.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Partida.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlacarTime1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlacarTime1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlacarTime2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlacarTime2)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
