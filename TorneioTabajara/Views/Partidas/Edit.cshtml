@@ -19,6 +19,8 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Rodada, htmlAttributes: new { @class = "control-label col-md-2" })
+=========
+            @Html.LabelFor(model => model.rodada, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Rodada, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Rodada, "", new { @class = "text-danger" })
