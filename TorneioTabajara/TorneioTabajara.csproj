@@ -127,12 +127,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ArtilhariaController.cs" />
     <Compile Include="Controllers\ComissaosController.cs" />
-    <Compile Include="Controllers\EstatisticaJogoesController.cs" />
+    <Compile Include="Controllers\EstatisticaJogosController.cs" />
     <Compile Include="Controllers\GolsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JogadorsController.cs" />
     <Compile Include="Controllers\PartidasController.cs" />
+    <Compile Include="Controllers\ResultadosController.cs" />
     <Compile Include="Controllers\TimesController.cs" />
     <Compile Include="Data\TorneioDBContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -149,6 +151,7 @@
     <Compile Include="Models\Partida.cs" />
     <Compile Include="Models\Time.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Views\EstatisticaJogoes\ResultadoDetalhado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -198,8 +201,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Partida.cshtml" />
+    <Content Include="Views\Home\Tabela.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Comissaos\Create.cshtml" />
     <Content Include="Views\Comissaos\Delete.cshtml" />
@@ -231,9 +234,11 @@
     <Content Include="Views\Times\Details.cshtml" />
     <Content Include="Views\Times\Edit.cshtml" />
     <Content Include="Views\Times\Index.cshtml" />
+    <Content Include="Views\Home\Artilharia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Resultados\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

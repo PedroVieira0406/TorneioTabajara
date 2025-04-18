@@ -11,7 +11,7 @@ using TorneioTabajara.Models;
 
 namespace TorneioTabajara.Controllers
 {
-    public class EstatisticaJogoesController : Controller
+    public class EstatisticaJogosController : Controller
     {
         private TorneioContext db = new TorneioContext();
 

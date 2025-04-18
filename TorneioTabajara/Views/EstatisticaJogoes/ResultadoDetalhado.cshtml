@@ -1,0 +1,32 @@
+﻿@model TorneioTabajara.Models.ResultadoViewModel
+
+<h2>Resultado da Partida</h2>
+
+<h3>@Model.Time1 @Model.PlacarTime1 x @Model.PlacarTime2 @Model.Time2</h3>
+
+<h4>Gols:</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Minuto</th>
+            <th>Jogador</th>
+            <th>Tipo de Gol</th>
+            <th>Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var gol in Model.Gols)
+        {
+            <tr>
+                <td>@gol.Minuto'</td>
+                <td>@gol.Jogador</td>
+                <td>@gol.TipoGol</td>
+                <td>@gol.Time</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    @Html.ActionLink("Voltar", "Index")
+</p>

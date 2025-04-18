@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Liga_Tabajara.Controllers.ArtilhariaController.ArtilheiroViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Artilharia";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">
+        <i class="bi bi-award-fill me-2 text-warning"></i>
+        Artilharia
+    </h2>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Jogador</th>
+                        <th>Camisa</th>
+                        <th>Time</th>
+                        <th>Gols</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int idx = 0;
+                        int rank = 0;
+                        int lastGols = -1;
+                    }
+
+                    @foreach (var a in Model)
+                    {
+                        idx++;
+                        if (a.TotalGols != lastGols)
+                        {
+                            rank = idx;
+                            lastGols = a.TotalGols;
+                        }
+
+                        string rowClass = "";
+                        string medalIcon = "";
+
+                        if (rank == 1)
+                        {
+                            rowClass = "table-success";
+                            medalIcon = "<i class=\"bi bi-trophy-fill text-warning\"></i>";
+                        }
+                        else if (rank == 2)
+                        {
+                            rowClass = "table-secondary";
+                            medalIcon = "<i class=\"bi bi-trophy-fill text-secondary\"></i>";
+                        }
+                        else if (rank == 3)
+                        {
+                            rowClass = "table-warning";
+                            medalIcon = "<i class=\"bi bi-trophy-fill\" style=\"color:#cd7f32\"></i>";
+                        }
+
+                        <tr class="@rowClass">
+                            <td>
+                                @Html.Raw(medalIcon)
+                                @if (rank > 3)
+                                {
+                                    @rank
+                                }
+                            </td>
+                            <td>@a.Nome</td>
+                            <td>@a.NumeroCamisa</td>
+                            <td>@a.TimeNome</td>
+                            <td>@a.TotalGols</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+}
