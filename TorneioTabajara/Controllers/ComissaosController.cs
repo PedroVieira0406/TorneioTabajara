@@ -16,10 +16,23 @@ namespace TorneioTabajara.Controllers
         private TorneioContext db = new TorneioContext();
 
         // GET: Comissaos
-        public ActionResult Index()
+        public ActionResult Index(string nome, Cargo? cargo)
         {
-            var Comissaos = db.Comissaos.Include(c => c.Time);
-            return View(Comissaos.ToList());
+            var comissaos = db.Comissaos.Include(c => c.Time).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(nome))
+            {
+                comissaos = comissaos.Where(c => c.Nome.Contains(nome));
+            }
+
+            if (cargo.HasValue)
+            {
+                comissaos = comissaos.Where(c => c.Cargo == cargo.Value);
+            }
+
+            ViewBag.Cargo = Enum.GetValues(typeof(Cargo));
+
+            return View(comissaos.ToList());
         }
 
         // GET: Comissaos/Details/5

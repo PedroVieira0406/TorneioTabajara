@@ -16,9 +16,28 @@ namespace TorneioTabajara.Controllers
         private TorneioContext db = new TorneioContext();
 
         // GET: Jogadors
-        public ActionResult Index()
+        public ActionResult Index(string nome, Posicao? posicao, PePreferido? pePreferido)
         {
-            var jogadores = db.Jogadores.Include(j => j.Time);
+            var jogadores = db.Jogadores.Include(j => j.Time).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(nome))
+            {
+                jogadores = jogadores.Where(j => j.Nome.Contains(nome));
+            }
+
+            if (posicao.HasValue)
+            {
+                jogadores = jogadores.Where(j => j.Posicao == posicao.Value);
+            }
+
+            if (pePreferido.HasValue)
+            {
+                jogadores = jogadores.Where(j => j.PePreferido == pePreferido.Value);
+            }
+
+            ViewBag.Posicao = Enum.GetValues(typeof(Posicao));
+            ViewBag.PePreferido = Enum.GetValues(typeof(PePreferido));
+
             return View(jogadores.ToList());
         }
 
