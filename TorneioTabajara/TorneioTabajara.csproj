@@ -138,9 +138,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202504180104595_AtualizandoPartida.cs" />
-    <Compile Include="Migrations\202504180104595_AtualizandoPartida.Designer.cs">
-      <DependentUpon>202504180104595_AtualizandoPartida.cs</DependentUpon>
+    <Compile Include="Migrations\202504182009107_Reestruturando_Codigo.cs" />
+    <Compile Include="Migrations\202504182009107_Reestruturando_Codigo.Designer.cs">
+      <DependentUpon>202504182009107_Reestruturando_Codigo.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Comissao.cs" />
@@ -263,8 +263,8 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202504180104595_AtualizandoPartida.resx">
-      <DependentUpon>202504180104595_AtualizandoPartida.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202504182009107_Reestruturando_Codigo.resx">
+      <DependentUpon>202504182009107_Reestruturando_Codigo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -18,41 +18,52 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var partida in Model)
+        @if (Model != null)
         {
-            var estat = partida.EstatisticaJogo;
-            var gols = estat?.Gols.OrderBy(g => g.Minuto).ToList();
+            foreach (var partida in Model)
+            {
+                var estat = partida?.EstatisticaJogo;
+                var gols = estat?.Gols?.OrderBy(g => g.Minuto).ToList();
 
+                <tr>
+                    <td>@partida?.Rodada</td>
+                    <td>@(partida?.DataHora.ToString("dd/MM/yyyy HH:mm"))</td>
+                    <td>@(partida?.Time1?.Nome ?? "N/D")</td>
+                    <td>@(partida?.Time2?.Nome ?? "N/D")</td>
+                    <td>
+                        @if (estat != null)
+                        {
+                            @($"{estat.PlacarTime1} x {estat.PlacarTime2}")
+                        }
+                        else
+                        {
+                            <text>Aguardando</text>
+                        }
+                    </td>
+                    <td>
+                        @if (gols != null && gols.Any())
+                        {
+                            <ul>
+                                @foreach (var gol in gols)
+                                {
+                                    <li>
+                                        @gol.Minuto' - @gol.Jogador?.Nome (@gol.Jogador?.Time?.Nome ?? "N/D")
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <text>—</text>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
             <tr>
-                <td>@partida.Rodada</td>
-                <td>@partida.DataHora.ToString("dd/MM/yyyy HH:mm")</td>
-                <td>@partida.Time1.Nome</td>
-                <td>@partida.Time2.Nome</td>
-                <td>
-                    @if (estat != null)
-                    {
-                        @($"{estat.PlacarTime1} x {estat.PlacarTime2}")
-                    }
-                    else
-                    {
-                        <text>Aguardando</text>
-                    }
-                </td>
-                <td>
-                    @if (gols != null && gols.Any())
-                    {
-                        <ul>
-                            @foreach (var gol in gols)
-                            {
-                                <li>@gol.Minuto' - @gol.Jogador.Nome (@gol.Jogador.Time.Nome)</li>
-                            }
-                        </ul>
-                    }
-                    else
-                    {
-                        <text>—</text>
-                    }
-                </td>
+                <td colspan="6" class="text-center">Nenhuma partida encontrada.</td>
             </tr>
         }
     </tbody>

@@ -25,7 +25,7 @@ status*/
         public string CorPrimaria { get; set; }
         public string CorSecundaria { get; set; }
         public bool Status { get; set; } // Ativo ou Inativo
-        public virtual ICollection<Comissao> Comissoes { get; set; } // Lista de comissões técnicas
+        public virtual ICollection<Comissao> Comissaos { get; set; } // Lista de comissões técnicas
         public virtual ICollection<Jogador> Jogadores { get; set; } // Lista de jogadores
     }
 }

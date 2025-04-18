@@ -7,13 +7,13 @@ namespace TorneioTabajara.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.5.1")]
-    public sealed partial class AtualizandoPartida : IMigrationMetadata
+    public sealed partial class Reestruturando_Codigo : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AtualizandoPartida));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Reestruturando_Codigo));
         
         string IMigrationMetadata.Id
         {
-            get { return "202504180104595_AtualizandoPartida"; }
+            get { return "202504182009107_Reestruturando_Codigo"; }
         }
         
         string IMigrationMetadata.Source

@@ -8,7 +8,7 @@ namespace TorneioTabajara.Models
     public class Partida
     {
         public int Id { get; set; }
-        public int rodada { get; set; }
+        public int Rodada { get; set; }
         public int Time1Id { get; set; }
         public virtual Time Time1 { get; set; }
         public int Time2Id { get; set; }

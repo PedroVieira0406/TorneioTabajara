@@ -9,14 +9,15 @@ namespace TorneioTabajara.Models
 {
     public enum Posicao
     {
-        goleiro,
-        zagueiro,
-        lateral,
-        volante,
-        meioCampista,
-        meiasAtacante,
-        ponta,
-        atacante
+        Goleiro,
+        Zagueiro,
+        LateralDireito,
+        LateralEsquerdo,
+        Volante,
+        MeioCampista,
+        Meia,
+        Ponta,
+        Atacante
     }
     public enum PePreferido
     {
@@ -42,6 +43,7 @@ Time*/
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DataNascimento { get; set; }
+        public Posicao Posicao { get; set; }
         public int Camisa { get; set; }
         public double Altura { get; set; }
         public double Peso { get; set; }

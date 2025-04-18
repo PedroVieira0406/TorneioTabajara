@@ -51,7 +51,7 @@ namespace TorneioTabajara.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,rodada,Time1Id,Time2Id,DataHora,EstatisticaJogoId")] Partida partida)
+        public ActionResult Create([Bind(Include = "Id,Rodada,Time1Id,Time2Id,DataHora,EstatisticaJogoId")] Partida partida)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace TorneioTabajara.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,rodada,Time1Id,Time2Id,DataHora,EstatisticaJogoId")] Partida partida)
+        public ActionResult Edit([Bind(Include = "Id,Rodada,Time1Id,Time2Id,DataHora,EstatisticaJogoId")] Partida partida)
         {
             if (ModelState.IsValid)
             {

@@ -18,8 +18,8 @@ namespace TorneioTabajara.Controllers
         // GET: Comissaos
         public ActionResult Index()
         {
-            var comissoes = db.Comissoes.Include(c => c.Time);
-            return View(comissoes.ToList());
+            var Comissaos = db.Comissaos.Include(c => c.Time);
+            return View(Comissaos.ToList());
         }
 
         // GET: Comissaos/Details/5
@@ -29,7 +29,7 @@ namespace TorneioTabajara.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comissao comissao = db.Comissoes.Find(id);
+            Comissao comissao = db.Comissaos.Find(id);
             if (comissao == null)
             {
                 return HttpNotFound();
@@ -49,11 +49,11 @@ namespace TorneioTabajara.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TimeId,Nome,DataNascimento")] Comissao comissao)
+        public ActionResult Create([Bind(Include = "Id,TimeId,Nome,DataNascimento,Cargo")] Comissao comissao)
         {
             if (ModelState.IsValid)
             {
-                db.Comissoes.Add(comissao);
+                db.Comissaos.Add(comissao);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -69,7 +69,7 @@ namespace TorneioTabajara.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comissao comissao = db.Comissoes.Find(id);
+            Comissao comissao = db.Comissaos.Find(id);
             if (comissao == null)
             {
                 return HttpNotFound();
@@ -83,7 +83,7 @@ namespace TorneioTabajara.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TimeId,Nome,DataNascimento")] Comissao comissao)
+        public ActionResult Edit([Bind(Include = "Id,TimeId,Nome,DataNascimento,Cargo")] Comissao comissao)
         {
             if (ModelState.IsValid)
             {
@@ -102,7 +102,7 @@ namespace TorneioTabajara.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comissao comissao = db.Comissoes.Find(id);
+            Comissao comissao = db.Comissaos.Find(id);
             if (comissao == null)
             {
                 return HttpNotFound();
@@ -115,8 +115,8 @@ namespace TorneioTabajara.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Comissao comissao = db.Comissoes.Find(id);
-            db.Comissoes.Remove(comissao);
+            Comissao comissao = db.Comissaos.Find(id);
+            db.Comissaos.Remove(comissao);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
