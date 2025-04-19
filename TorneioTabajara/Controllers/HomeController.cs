@@ -14,112 +14,63 @@ namespace TorneioTabajara.Controllers
         private TorneioContext db = new TorneioContext();
         public ActionResult Index()
         {
-            var times = db.Times.Include(t => t.Jogadores).Include(t => t.Comissaos).ToList();
-
-            bool ligaApta = VerificarLigaApta(times);
-
-            ViewBag.LigaApta = ligaApta;
-            return View(times);
+            return View(); // Views/Home/Index.cshtml
         }
 
-        private bool VerificarLigaApta(List<Time> times)
+        public ActionResult Tabela()
         {
+            return View(); // Views/Home/Tabela.cshtml
+        }
+
+        public ActionResult Artilharia()
+        {
+            return View(); // Views/Home/Artilharia.cshtml
+        }
+        public ActionResult GerarETrazerPartidas()
+        {
+            // Chame o método de geração da HomeController aqui
+            var times = db.Times.ToList();
+
             if (times.Count != 20)
-                return false;
-
-            foreach (var time in times)
             {
-                if (time.Jogadores == null || time.Jogadores.Count < 30)
-                    return false;
-
-                if (time.Comissaos == null || time.Comissaos.Count < 5)
-                    return false;
-
-                var cargosDistintos = time.Comissaos.Select(c => c.Cargo).Distinct().Count();
-                if (cargosDistintos < 5)
-                    return false;
+                TempData["Erro"] = "É necessário ter exatamente 20 times para gerar a tabela.";
+                return RedirectToAction("Index");
             }
 
-            return true;
-        }
-
-
-        public ActionResult PopularBancoDeDados()
-        {
-            db.Jogadores.RemoveRange(db.Jogadores);
-            db.Comissaos.RemoveRange(db.Comissaos);
-            db.Times.RemoveRange(db.Times);
+            db.Partidas.RemoveRange(db.Partidas);
             db.SaveChanges();
 
-            Random random = new Random();
+            var partidas = new List<Partida>();
+            int rodada = 1;
+            DateTime dataInicial = DateTime.Today.AddDays(1);
 
-            var nomesTimes = new List<string>
+            for (int i = 0; i < times.Count - 1; i++)
             {
-                "Tabajara FC", "Galácticos", "Fúria Azul", "Trovões", "Leões do Norte",
-                "Águias da Montanha", "Falcões Vermelhos", "Tigres do Cerrado", "Lobos da Serra", "Guerreiros Urbanos",
-                "Dragões Dourados", "Fênix Negra", "Cavaleiros do Vale", "Santos de Aço", "Vikings Tropicais",
-                "Piratas do Sul", "Espartanos", "Corvos Brancos", "Samurais do Sertão", "Gladiadores Modernos"
-            };
-
-            var posicoes = Enum.GetValues(typeof(Posicao)).Cast<Posicao>().ToList();
-            var pes = Enum.GetValues(typeof(PePreferido)).Cast<PePreferido>().ToList();
-            var cargos = Enum.GetValues(typeof(Cargo)).Cast<Cargo>().ToList();
-
-            foreach (var nomeTime in nomesTimes)
-            {
-                var time = new Time
+                for (int j = i + 1; j < times.Count; j++)
                 {
-                    Nome = nomeTime,
-                    Cidade = "Cidade " + random.Next(1, 100),
-                    Estado = "Estado " + random.Next(1, 27),
-                    AnoFundacao = random.Next(1900, 2022),
-                    Estadio = "Estádio " + nomeTime,
-                    CapacidadeEstadio = random.Next(10000, 80000),
-                    CorPrimaria = "Cor" + random.Next(1, 10),
-                    CorSecundaria = "Cor" + random.Next(10, 20),
-                    Status = true
-                };
-
-                db.Times.Add(time);
-                db.SaveChanges(); // salvar aqui pra pegar o ID do time
-
-                // Jogadores
-                for (int i = 1; i <= 20; i++)
-                {
-                    var jogador = new Jogador
+                    partidas.Add(new Partida
                     {
-                        Nome = $"Jogador_{nomeTime}_{i}",
-                        DataNascimento = DateTime.Now.AddYears(-random.Next(18, 35)),
-                        Nacionalidade = "Brasileiro",
-                        Posicao = posicoes[random.Next(posicoes.Count)],
-                        Camisa = i,
-                        Altura = (float)(1.60 + random.NextDouble() * 0.4),
-                        Peso = (float)(60 + random.NextDouble() * 30),
-                        PePreferido = pes[random.Next(pes.Count)],
-                        TimeId = time.Id
-                    };
+                        Time1Id = times[i].Id,
+                        Time2Id = times[j].Id,
+                        DataHora = dataInicial.AddDays((rodada - 1) * 3),
+                        Rodada = rodada++
+                    });
 
-                    db.Jogadores.Add(jogador);
-                }
-
-                // Comissão Técnica
-                foreach (var cargo in cargos)
-                {
-                    var membro = new Comissao
+                    partidas.Add(new Partida
                     {
-                        Nome = $"Comissao_{nomeTime}_{cargo}",
-                        Cargo = cargo,
-                        DataNascimento = DateTime.Now.AddYears(-random.Next(30, 60)),
-                        TimeId = time.Id
-                    };
-
-                    db.Comissaos.Add(membro);
+                        Time1Id = times[j].Id,
+                        Time2Id = times[i].Id,
+                        DataHora = dataInicial.AddDays((rodada - 1) * 3),
+                        Rodada = rodada++
+                    });
                 }
-
-                db.SaveChanges();
             }
 
-            return Content("Banco de dados populado com sucesso!");
+            db.Partidas.AddRange(partidas);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
+
     }
-}
+    }

@@ -16,7 +16,7 @@ namespace TorneioTabajara.Models
 
         [DataType(DataType.DateTime)]
         public DateTime DataHora { get; set; }
-        public int EstatisticaJogoId { get; set; }
+        public int? EstatisticaJogoId { get; set; }
         public virtual EstatisticaJogo EstatisticaJogo { get; set; }
     }
 }

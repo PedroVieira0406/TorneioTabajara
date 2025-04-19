@@ -144,6 +144,10 @@
     <Compile Include="Migrations\202504182009107_Reestruturando_Codigo.Designer.cs">
       <DependentUpon>202504182009107_Reestruturando_Codigo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202504242324498_PermitirEstatisticaJogoNula.cs" />
+    <Compile Include="Migrations\202504242324498_PermitirEstatisticaJogoNula.Designer.cs">
+      <DependentUpon>202504242324498_PermitirEstatisticaJogoNula.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ClassificacaoTime.cs" />
     <Compile Include="Models\Comissao.cs" />
@@ -271,6 +275,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202504182009107_Reestruturando_Codigo.resx">
       <DependentUpon>202504182009107_Reestruturando_Codigo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504242324498_PermitirEstatisticaJogoNula.resx">
+      <DependentUpon>202504242324498_PermitirEstatisticaJogoNula.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
