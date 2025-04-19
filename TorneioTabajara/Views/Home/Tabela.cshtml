@@ -1,19 +1,58 @@
-﻿@{
-    ViewBag.Title = "Contact";
-}
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
+﻿﻿@@model List<Futebol.Models.Time>
 
-    <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
-    </address>
+    @{
+        ViewBag.Title = "Liga Tabajara de Futebol";
+    }
 
-    <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-    </address>
-</main>
+    <h1>Liga Tabajara de Futebol</h1>
+
+    <h2>Status da Liga:</h2>
+    @if (ViewBag.LigaApta)
+    {
+        <span style="color:green; font-weight:bold;">Apta para iniciar o campeonato!</span>
+    }
+    else
+    {
+        <span style="color:red; font-weight:bold;">Não apta para iniciar o campeonato!</span>
+    }
+
+    <hr />
+
+    <h2>Times Participantes</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+                <th>Estádio</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var time in Model)
+            {
+                <tr>
+                    <td>@time.Nome</td>
+                    <td>@time.Cidade</td>
+                    <td>@time.Estado</td>
+                    <td>@time.Estadio</td>
+                    <td>
+                        @Html.ActionLink("Ver detalhes", "Details", "Times", new { id = time.Id }, new { @class = "btn btn-primary btn-sm" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+        @Html.ActionLink("Gera novo Campeonato", "GerarPartidas", "Home", new { @class = "btn btn-success" })
+    </p>
+
+    @if (TempData["Sucesso"] != null)
+    {
+        <div class="alert alert-success">@TempData["Sucesso"]</div>
+    }
+    @if (TempData["Erro"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Erro"]</div>
+    }

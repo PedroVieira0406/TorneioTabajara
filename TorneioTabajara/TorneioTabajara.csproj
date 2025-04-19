@@ -145,6 +145,7 @@
       <DependentUpon>202504182009107_Reestruturando_Codigo.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ClassificacaoTime.cs" />
     <Compile Include="Models\Comissao.cs" />
     <Compile Include="Models\EstatisticaJogo.cs" />
     <Compile Include="Models\Jogador.cs" />
