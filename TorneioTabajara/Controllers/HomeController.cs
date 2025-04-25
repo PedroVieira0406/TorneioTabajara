@@ -37,7 +37,7 @@ namespace TorneioTabajara.Controllers
                 return RedirectToAction("Index");
             }
 
-            db.Partidas.RemoveRange(db.Partidas);
+            db.Partidas.RemoveRange(db.Partidas.ToList());
             db.SaveChanges();
 
             var partidas = new List<Partida>();
