@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<TorneioTabajara.Models.Comissao>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Comissões";
     var cargos = Enum.GetValues(typeof(TorneioTabajara.Models.Cargo)).Cast<TorneioTabajara.Models.Cargo>();
 }
 
-<h2>Index</h2>
+<h2>Comissão tecnica</h2>
 
 <!-- Formulário de busca -->
 @using (Html.BeginForm("Index", "Comissaos", FormMethod.Get))
@@ -40,16 +40,16 @@
 <table class="table table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Time.Nome)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Time.Nome)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Nome)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Nome)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DataNascimento)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().DataNascimento)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Cargo)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Cargo)
         </th>
         <th></th>
     </tr>
@@ -64,7 +64,7 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DataNascimento.ToShortDateString())
+                @(item.DataNascimento.ToShortDateString())
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Cargo)
