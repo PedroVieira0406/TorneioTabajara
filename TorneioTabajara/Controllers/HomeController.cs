@@ -48,6 +48,7 @@ namespace TorneioTabajara.Controllers
             {
                 for (int j = i + 1; j < times.Count; j++)
                 {
+
                     partidas.Add(new Partida
                     {
                         Time1Id = times[i].Id,
